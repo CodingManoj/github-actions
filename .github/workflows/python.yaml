@@ -1,6 +1,9 @@
 name: First Actions File
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'src/'
 
 jobs:
   build:
