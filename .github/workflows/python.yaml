@@ -1,6 +1,9 @@
-name: First Actions File
+name: Python App
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'src/app.py'
 
 jobs:
   build:
