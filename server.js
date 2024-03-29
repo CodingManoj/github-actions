@@ -114,7 +114,7 @@ app.get('/rename/:from/:to', (req, res) => {
     });
 });
 
-// update/create cart : sample
+// update/create cart : samples
 app.get('/add/:id/:sku/:qty', (req, res) => {
     // check quantity
     var qty = parseInt(req.params.qty);
