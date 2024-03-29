@@ -1,0 +1,27 @@
+name: CI for Cart
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['18.x']         # both tghe versions will be installed : Means 2 flows will be triggered. I want to run the applicaiton with both the versions
+
+    steps:
+    - uses: actions/checkout@v4              # Checksout the branch
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+          node-version: ${{ matrix.node-version }}
+
+    - name: Insalling dependencies
+      run: |
+        npm install
+
+    - name: Running Tests
+      run: |
+        npm test
