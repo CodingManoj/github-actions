@@ -1,0 +1,29 @@
+name: First Actions File
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9]           # both tghe versions will be installed : Means 2 flows will be triggered. I want to run the applicaiton with both the versions
+
+    steps:
+    - uses: actions/checkout@v3              # Checksout the branch
+
+    - name: Set up Python                    # Run the entire workflow with the versions mentioned above
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: | 
+        python -m pip install --upgrade pip  
+        pip install pytest
+
+    - name: Run tests
+      run: |
+        cd src
+        python -m pytest addition.py
