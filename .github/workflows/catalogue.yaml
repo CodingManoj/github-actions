@@ -1,0 +1,31 @@
+name: CI for Catalogue
+
+on:
+  push:
+    paths:
+      - 'catalogue/server.js'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['18.x']         # both tghe versions will be installed : Means 2 flows will be triggered. I want to run the applicaiton with both the versions
+
+    steps:
+    - uses: actions/checkout@v4              # Checksout the branch
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+          node-version: ${{ matrix.node-version }}
+
+    - name: Insalling dependencies
+      run: |
+        cd catalogue/
+        npm install
+
+    - name: Validating Artifacts
+      run: |
+        ls -ltr
